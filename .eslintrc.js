@@ -1,7 +1,7 @@
 module.exports = {
     root: true,
     parser: "@typescript-eslint/parser",
-    plugins: ["@typescript-eslint"],
+    plugins: ["@typescript-eslint", "import"],
     extends: [
         "eslint:recommended",
         "plugin:@typescript-eslint/recommended",
@@ -151,5 +151,23 @@ module.exports = {
         "no-empty-character-class": "warn", // disallow the use of empty character classes in regular expressions
         "jsx-quotes": ["warn", "prefer-double"], // enforces the usage of double quotes for all JSX attribute values which doesn’t contain a double quote
         "space-unary-ops": ["warn", { words: true, nonwords: false }], // require or disallow spaces before/after unary operators (words on by default, nonwords off by default)
+        "import/order": [
+            "warn",
+            {
+                groups: ["builtin", "external", "internal", ["parent", "sibling"]],
+                pathGroupsExcludedImportTypes: ["src**"],
+                pathGroups: [
+                    {
+                        pattern: "src/**",
+                        group: "internal",
+                        position: "after",
+                    },
+                ],
+                "newlines-between": "always",
+                alphabetize: {
+                    order: "asc",
+                },
+            },
+        ],
     },
 };
